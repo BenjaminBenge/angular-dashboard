@@ -27,7 +27,7 @@ jobs:
       - run: npm run build -- --configuration=production --base-href=/angular-dashboard/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/angular-dashboard
+          path: dist/angular-dashboard/browser
 
   deploy:
     needs: build
