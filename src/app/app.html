@@ -1,0 +1,34 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="logo">N</span>
+      <span class="brand-name">NSSF Admin</span>
+    </div>
+    <nav>
+      <a class="nav-item" routerLink="/dashboard" routerLinkActive="active"><span class="icon">▦</span> Dashboard</a>
+      <a class="nav-item" routerLink="/members" routerLinkActive="active"><span class="icon">👥</span> Members</a>
+      <a class="nav-item" routerLink="/employers" routerLinkActive="active"><span class="icon">🏢</span> Employers</a>
+      <a class="nav-item" routerLink="/claims" routerLinkActive="active"><span class="icon">📁</span> Claims</a>
+      <a class="nav-item" routerLink="/investments" routerLinkActive="active"><span class="icon">📈</span> Investments</a>
+    </nav>
+    <a class="sidebar-footer" routerLink="/settings" routerLinkActive="active">
+      <span class="icon">⚙️</span> Settings
+    </a>
+  </aside>
+
+  <main class="main-area">
+    <header class="topbar">
+      <input type="search" class="search" placeholder="Search members, employers, claims..." />
+      <div class="topbar-actions">
+        <span class="icon-btn">🔔</span>
+        <div class="user">
+          <span class="user-avatar">B</span>
+          <span class="user-name">Benjamin</span>
+        </div>
+      </div>
+    </header>
+    <div class="content">
+      <router-outlet />
+    </div>
+  </main>
+</div>

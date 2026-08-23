@@ -1,0 +1,12 @@
+{
+  "tracks": [
+    { "id": "1", "title": "Sunset Drive", "artist": "Lofi Dreamer", "duration": 184, "plays": 12400, "likes": 3400, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/sunset/250" },
+    { "id": "2", "title": "Midnight City", "artist": "Neon Pulse", "duration": 226, "plays": 18900, "likes": 5200, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/midnight/250" },
+    { "id": "3", "title": "Ocean Breeze", "artist": "Chill Waves", "duration": 198, "plays": 8600, "likes": 2100, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/ocean/250" },
+    { "id": "4", "title": "Urban Echo", "artist": "Metro Sound", "duration": 245, "plays": 23100, "likes": 7800, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/urban/250" },
+    { "id": "5", "title": "Mountain High", "artist": "Acoustic Soul", "duration": 210, "plays": 5400, "likes": 1500, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/mountain/250" },
+    { "id": "6", "title": "Neon Rain", "artist": "Synthwave Boy", "duration": 201, "plays": 31200, "likes": 9100, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/neon/250" },
+    { "id": "7", "title": "Golden Hour", "artist": "Acoustic Soul", "duration": 175, "plays": 7600, "likes": 1900, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/golden/250" },
+    { "id": "8", "title": "Night Drive", "artist": "Lofi Dreamer", "duration": 238, "plays": 14500, "likes": 4100, "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", "coverUrl": "https://picsum.photos/seed/night/250" }
+  ]
+}

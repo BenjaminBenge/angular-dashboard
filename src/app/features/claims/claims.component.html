@@ -1,0 +1,130 @@
+<div class="page">
+  <header class="page-header">
+    <h1>Claims Management Portal</h1>
+    <p>National Social Security Fund — Benefits processing & payouts</p>
+  </header>
+
+  <section class="overview-grid" aria-label="Claims metrics">
+    @for (metric of metrics; track metric.label) {
+      <article class="metric-card" [class]="'tone-' + metric.tone">
+        <div class="metric-icon">{{ metric.icon }}</div>
+        <div class="metric-content">
+          <div class="metric-label">{{ metric.label }}</div>
+          <div class="metric-value">{{ metric.value }}</div>
+          <div class="metric-sub">{{ metric.sub }}</div>
+        </div>
+      </article>
+    }
+  </section>
+
+  <div class="sections-grid">
+    <section class="section-card wide">
+      <div class="section-header">
+        <h2>Turnaround Time (TAT) Analysis</h2>
+        <span class="section-sub">Average days from filing to payment</span>
+      </div>
+      <div class="line-chart">
+        <svg viewBox="0 0 600 200" preserveAspectRatio="none" class="chart-svg">
+          <polyline fill="none" stroke="#1e3a8a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" [attr.points]="tatPoints()" />
+        </svg>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Payout Types</h2>
+        <span class="section-sub">Money leaving the fund</span>
+      </div>
+      <div class="donut-wrap">
+        <div class="donut" [style.background]="payoutGradient()">
+          <div class="donut-center">
+            <span class="donut-percent">{{ payoutTypes[0].value / payoutTotal() * 100 | number:'1.0-1' }}%</span>
+            <span class="donut-label">Age / Retirement</span>
+          </div>
+        </div>
+        <div class="donut-legend">
+          @for (item of payoutTypes; track $index) {
+            <div class="legend-row">
+              <span class="dot" [style.background-color]="item.color"></span>
+              <span>{{ item.type }}</span>
+              <span class="legend-value">{{ item.value | shortCurrency }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card wide">
+      <div class="section-header">
+        <h2>Claims Queue</h2>
+        <span class="section-sub">Claims awaiting action</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Claim ID</th>
+            <th>Member</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (claim of claimsQueue; track $index) {
+            <tr>
+              <td>{{ claim.id }}</td>
+              <td>{{ claim.member }}</td>
+              <td>{{ claim.type }}</td>
+              <td>{{ claim.amount | shortCurrency }}</td>
+              <td>
+                <span class="badge" [class.compliant]="claim.status === 'Approved' || claim.status === 'Paid'" [class.due]="claim.status === 'Pending'" [class.danger]="claim.status === 'Rejected'">
+                  {{ claim.status }}
+                </span>
+              </td>
+              <td>{{ claim.submitted | date }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Claim Aging Distribution</h2>
+        <span class="section-sub">Pending claims by age</span>
+      </div>
+      <div class="pipeline">
+        @for (item of aging; track $index) {
+          <div class="pipeline-row">
+            <span class="pipeline-label">{{ item.bucket }}</span>
+            <div class="pipeline-bar">
+              <div class="bar" [style.width.%]="(item.count / maxAging()) * 100"></div>
+            </div>
+            <span class="pipeline-value">{{ item.count }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Verification Activity</h2>
+        <span class="section-sub">Recent claim actions</span>
+      </div>
+      <ul class="list">
+        @for (item of verification; track $index) {
+          <li>
+            <div class="list-title">{{ item.action }}</div>
+            <div class="list-meta">
+              <span>{{ item.user }} • {{ item.time }}</span>
+              <span class="badge" [class.compliant]="item.status === 'success'" [class.due]="item.status === 'warning'" [class.danger]="item.status === 'danger'">
+                {{ item.status }}
+              </span>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="page">
+  <header class="page-header">
+    <h1>Employer Management</h1>
+    <p>National Social Security Fund — Registration & compliance</p>
+  </header>
+
+  <section class="overview-grid" aria-label="Employer metrics">
+    @for (metric of metrics; track metric.label) {
+      <article class="metric-card" [class]="'tone-' + metric.tone">
+        <div class="metric-icon">{{ metric.icon }}</div>
+        <div class="metric-content">
+          <div class="metric-label">{{ metric.label }}</div>
+          <div class="metric-value">{{ metric.value }}</div>
+          <div class="metric-sub">{{ metric.sub }}</div>
+        </div>
+      </article>
+    }
+  </section>
+
+  <div class="sections-grid">
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Compliance Status</h2>
+        <span class="section-sub">Employer payment behavior</span>
+      </div>
+      <div class="donut-wrap">
+        <div class="donut" [style.background]="complianceGradient()">
+          <div class="donut-center">
+            <span class="donut-percent">{{ compliance[0].value }}%</span>
+            <span class="donut-label">Compliant</span>
+          </div>
+        </div>
+        <div class="donut-legend">
+          @for (item of compliance; track $index) {
+            <div class="legend-row">
+              <span class="dot" [style.background-color]="item.color"></span>
+              <span>{{ item.status }}</span>
+              <span class="legend-value">{{ item.value }}%</span>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Defaulter Recovery Pipeline</h2>
+        <span class="section-sub">Overdue remittances</span>
+      </div>
+      <div class="pipeline">
+        @for (item of pipeline; track $index) {
+          <div class="pipeline-row">
+            <span class="pipeline-label">{{ item.bucket }}</span>
+            <div class="pipeline-bar">
+              <div class="bar" [style.width.%]="(item.amount / maxPipeline()) * 100"></div>
+            </div>
+            <span class="pipeline-value">{{ item.amount | shortCurrency }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="section-card wide">
+      <div class="section-header">
+        <h2>Employer Directory</h2>
+        <span class="section-sub">Top contributing employers</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Employer</th>
+            <th>Sector</th>
+            <th>Employees</th>
+            <th>Contributions</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employer of directory; track $index) {
+            <tr>
+              <td>{{ employer.name }}</td>
+              <td>{{ employer.sector }}</td>
+              <td>{{ employer.employees | number }}</td>
+              <td>{{ employer.amount | shortCurrency }}</td>
+              <td>
+                <span class="badge" [class.compliant]="employer.status === 'compliant'" [class.risk]="employer.status === 'at-risk'" [class.danger]="employer.status === 'non-compliant'">
+                  {{ employer.status }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Employer Sector Distribution</h2>
+        <span class="section-sub">Registered employers by sector</span>
+      </div>
+      <div class="donut-wrap">
+        <div class="donut" [style.background]="sectorGradient()">
+          <div class="donut-center">
+            <span class="donut-percent">{{ sectorDistribution[0].value / (sectorDistribution[0].value + sectorDistribution[1].value + sectorDistribution[2].value + sectorDistribution[3].value + sectorDistribution[4].value) * 100 | number:'1.0-1' }}%</span>
+            <span class="donut-label">Manufacturing</span>
+          </div>
+        </div>
+        <div class="donut-legend">
+          @for (sector of sectorDistribution; track $index) {
+            <div class="legend-row">
+              <span class="dot" [style.background-color]="['#1e3a8a', '#059669', '#d97706', '#7c3aed', '#64748b'][$index]"></span>
+              <span>{{ sector.name }}</span>
+              <span class="legend-value">{{ sector.value | number }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header">
+        <h2>Recent Administrative Activity</h2>
+        <span class="section-sub">Employer actions</span>
+      </div>
+      <ul class="list">
+        @for (item of activity; track $index) {
+          <li>
+            <div class="list-title">{{ item.action }}</div>
+            <div class="list-meta">
+              <span>{{ item.detail }} • {{ item.time }}</span>
+              <span class="badge" [class.compliant]="item.status === 'success'" [class.due]="item.status === 'warning'" [class.danger]="item.status === 'danger'">
+                {{ item.status }}
+              </span>
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  </div>
+</div>
